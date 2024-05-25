@@ -7,7 +7,7 @@ const { v4: uuidv4 } = require('uuid');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const token = 'YOUR_TELEGRAM_BOT_API_TOKEN';
+const token = '6407631718:AAE2l3Seh9or3T2ovCfNOhdhT4VuFCQ-RF8';
 const bot = new TelegramBot(token, { polling: true });
 
 // In-memory store for user access tokens with expiry times and stats
@@ -34,7 +34,7 @@ function saveStatsToAPI() {
         userCount: stats.users.size,
         linksProcessed: stats.linksProcessed
     };
-    axios.get(`https://file2earn.top/?data=${encodeURIComponent(JSON.stringify(statsData))}`)
+    axios.get(`https://file2earn.top/bot/?data=${encodeURIComponent(JSON.stringify(statsData))}`)
         .then(response => {
             console.log('Stats saved successfully:', response.data);
         })
@@ -55,7 +55,7 @@ bot.onText(/\/start$/, async (msg) => {
     stats.users.add(userId);
 
     // Save user ID to the API
-    await axios.get(`https://file2earn.top/id.php?data=${userId}`)
+    await axios.get(`https://file2earn.top/bot/id.php?data=${userId}`)
         .then(response => {
             console.log('User ID saved successfully:', response.data);
         })
@@ -66,7 +66,7 @@ bot.onText(/\/start$/, async (msg) => {
     if (!userAccess[userId] || userAccess[userId] < Date.now()) {
         bot.sendMessage(chatId, '👋 Welcome to Terabox Downloader and Streamer Bot. Give me a Terabox link to download it or stream it. To use the bot, you need to verify your access first.');
     } else {
-        bot.sendMessage(chatId, '✅ You can now use the bot for the next 24 hours.');
+        bot.sendMessage(chatId, '👋 Welcome to Terabox Downloader and Streamer Bot. Give me a Terabox link to download it or stream it');
     }
 });
 
@@ -87,7 +87,7 @@ bot.onText(/\/n (.+)/, async (msg, match) => {
     const notification = match[1];
 
     try {
-        const response = await axios.get('https://file2earn.top/ids.txt');
+        const response = await axios.get('https://file2earn.top/bot/ids.txt');
         const allUserIds = response.data.split('\n').map(id => id.trim());
 
         // Send notification to each user only once
@@ -176,7 +176,7 @@ async function downloadVideo(url) {
 async function generateVerificationLink(userId) {
     const uniqueCode = generateUniqueCode();
     verificationCodes[uniqueCode] = userId;
-    const verifyUrl = `https://telegram.me/teradownrobot?start=${uniqueCode}`;
+    const verifyUrl = `https://telegram.me/terastream_bot?start=${uniqueCode}`;
     const shortenResponse = await axios.get(`https://teraboxlinks.com/api?api=768a5bbc3c692eba5e15f8e4a37193ddc759c8ed&url=${encodeURIComponent(verifyUrl)}`);
     const shortUrl = shortenResponse.data.shortenedUrl;
     return shortUrl;
