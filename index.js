@@ -66,7 +66,7 @@ bot.onText(/\/start$/, async (msg) => {
     if (!userAccess[userId] || userAccess[userId] < Date.now()) {
         bot.sendMessage(chatId, '👋 Welcome to Terabox Downloader and Streamer Bot. Give me a Terabox link to download it or stream it. To use the bot, you need to verify your access first.');
     } else {
-        bot.sendMessage(chatId, '👋 Welcome to Terabox Downloader and Streamer Bot. Give me a Terabox link to download it or stream it.');
+        bot.sendMessage(chatId, '✅ You can now use the bot for the next 24 hours.');
     }
 });
 
@@ -176,7 +176,7 @@ async function downloadVideo(url) {
 async function generateVerificationLink(userId) {
     const uniqueCode = generateUniqueCode();
     verificationCodes[uniqueCode] = userId;
-    const verifyUrl = `https://telegram.me/terastream_bot?start=${uniqueCode}`;
+    const verifyUrl = `https://telegram.me/teradownrobot?start=${uniqueCode}`;
     const shortenResponse = await axios.get(`https://teraboxlinks.com/api?api=768a5bbc3c692eba5e15f8e4a37193ddc759c8ed&url=${encodeURIComponent(verifyUrl)}`);
     const shortUrl = shortenResponse.data.shortenedUrl;
     return shortUrl;
