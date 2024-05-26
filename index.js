@@ -1,13 +1,13 @@
-const express = require('express');
 const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
+const express = require('express');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-const token = process.env.TELEGRAM_BOT_API_TOKEN;
+const token = '6407631718:AAE2l3Seh9or3T2ovCfNOhdhT4VuFCQ-RF8';
 const bot = new TelegramBot(token, { polling: true });
 
 // In-memory store for user access tokens with expiry times and stats
@@ -205,11 +205,11 @@ bot.onText(/\/start (.+)/, (msg, match) => {
     }
 });
 
-// Express server to keep the bot running
+// Express server to keep the bot alive on Heroku
 app.get('/', (req, res) => {
-    res.send('Telegram bot is running.');
+    res.send('Bot is running...');
 });
 
 app.listen(port, () => {
-    console.log(`Express server is running on port ${port}`);
+    console.log(`Server is running on port ${port}`);
 });
