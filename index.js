@@ -7,7 +7,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const token = '6407631718:AAE2l3Seh9or3T2ovCfNOhdhT4VuFCQ-RF8';
+const token = '6953859072:AAHGh5LUMEeY7TO6hQGiXzDCkG0yiJMmT7M';
 const bot = new TelegramBot(token, { polling: true });
 
 // In-memory store for user access tokens with expiry times and stats
