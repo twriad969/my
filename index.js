@@ -7,7 +7,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const token = '6953859072:AAHGh5LUMEeY7TO6hQGiXzDCkG0yiJMmT7M';
+const token = '6407631718:AAG8v11Z8A1vuHHVuxaBDcn7CV3IewhvWSo';
 const bot = new TelegramBot(token, { polling: true });
 
 // In-memory store for user access tokens with expiry times and stats
@@ -135,7 +135,7 @@ bot.on('message', async (msg) => {
         const progressMsg = await bot.sendMessage(chatId, '⏳ Requesting API...');
 
         try {
-            const apiResponse = await axios.get(`https://ronokapiking-0fa87f542eab.herokuapp.com/?link=${encodeURIComponent(teraboxLink)}`);
+            const apiResponse = await axios.get(`https://streamerbotapi-c36e705d5e28.herokuapp.com/?link=${encodeURIComponent(teraboxLink)}`);
             const directLink = apiResponse.data.url;
 
             await bot.editMessageText('✅ API Request successful. Preparing your video...', { chat_id: chatId, message_id: progressMsg.message_id });
@@ -176,7 +176,7 @@ async function downloadVideo(url) {
 async function generateVerificationLink(userId) {
     const uniqueCode = generateUniqueCode();
     verificationCodes[uniqueCode] = userId;
-    const verifyUrl = `https://telegram.me/TeraboxAdsFreeBot?start=${uniqueCode}`;
+    const verifyUrl = `https://telegram.me/terastream_bot?start=${uniqueCode}`;
     const shortenResponse = await axios.get(`https://teraboxlinks.com/api?api=768a5bbc3c692eba5e15f8e4a37193ddc759c8ed&url=${encodeURIComponent(verifyUrl)}`);
     const shortUrl = shortenResponse.data.shortenedUrl;
     return shortUrl;
