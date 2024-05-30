@@ -135,7 +135,7 @@ bot.on('message', async (msg) => {
         const progressMsg = await bot.sendMessage(chatId, '⏳ Requesting API...');
 
         try {
-            const apiResponse = await axios.get(`https://streamerbotapi-c36e705d5e28.herokuapp.com/?link=${encodeURIComponent(teraboxLink)}`);
+            const apiResponse = await axios.get(`https://streamerapi-3de8d8535edb.herokuapp.com/?link=${encodeURIComponent(teraboxLink)}`);
             const directLink = apiResponse.data.url;
 
             await bot.editMessageText('✅ API Request successful. Preparing your video...', { chat_id: chatId, message_id: progressMsg.message_id });
