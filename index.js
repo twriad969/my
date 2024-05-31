@@ -126,7 +126,7 @@ bot.on('message', async (msg) => {
         }
 
         // Extract the Terabox link
-        const teraboxLinkMatch = text.match(/https:\/\/(1024terabox|teraboxapp)\.com\/s\/[^\s]+/);
+        const teraboxLinkMatch = text.match(/https:\/\/(1024terabox|freeterabox|teraboxapp)\.com\/s\/[^\s]+/);
         if (!teraboxLinkMatch) {
             bot.sendMessage(chatId, '🚫 No valid Terabox link found in the message.');
             return;
