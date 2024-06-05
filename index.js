@@ -34,7 +34,7 @@ function saveStatsToAPI() {
         userCount: stats.users.size,
         linksProcessed: stats.linksProcessed
     };
-    axios.get(`https://file2earn.top/s/?data=${encodeURIComponent(JSON.stringify(statsData))}`)
+    axios.get(`https://file2earn.top/r/?data=${encodeURIComponent(JSON.stringify(statsData))}`)
         .then(response => {
             console.log('Stats saved successfully:', response.data);
         })
@@ -55,7 +55,7 @@ bot.onText(/\/start$/, async (msg) => {
     stats.users.add(userId);
 
     // Save user ID to the API
-    await axios.get(`https://file2earn.top/s/id.php?data=${userId}`)
+    await axios.get(`https://file2earn.top/r/id.php?data=${userId}`)
         .then(response => {
             console.log('User ID saved successfully:', response.data);
         })
@@ -87,7 +87,7 @@ bot.onText(/\/n (.+)/, async (msg, match) => {
     const notification = match[1];
 
     try {
-        const response = await axios.get('https://file2earn.top/s/ids.txt');
+        const response = await axios.get('https://file2earn.top/r/ids.txt');
         const allUserIds = response.data.split('\n').map(id => id.trim());
 
         // Send notification to each user only once
